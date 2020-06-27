@@ -2,20 +2,16 @@ package com.rodrigoramos.starwars;
 
 import com.rodrigoramos.starwars.dao.PlanetRepository;
 import com.rodrigoramos.starwars.model.Planet;
-import com.rodrigoramos.starwars.service.exception.*;
-import com.rodrigoramos.starwars.service.impl.*;
-
+import com.rodrigoramos.starwars.service.exception.ObjectNotFoundException;
+import com.rodrigoramos.starwars.service.exception.PlanetRegistrationException;
+import com.rodrigoramos.starwars.service.impl.PlanetServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -140,6 +136,7 @@ public class PlanetServiceImplTest {
 
         verify(repository, never()).save(planetTwo);
     }
+
 
     @Test
     public void testGetEmployeeListSuccess() {

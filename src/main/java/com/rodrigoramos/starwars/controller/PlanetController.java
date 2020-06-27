@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@Api(tags = "Planet API")
+@Api(tags = "Planet")
 public interface PlanetController {
-    @ApiOperation("Add new data")
+    @ApiOperation("Add new planet")
     ResponseEntity<Void> save(@RequestBody PlanetDTO planetDTO);
 
     @ApiOperation("Find planet by Id")
     ResponseEntity<Planet> findById(@PathVariable("id") Long id);
 
-    @ApiOperation("Delete based on primary key")
+    @ApiOperation("Delete planet based on primary key")
     void delete(@PathVariable("id") Long id);
 
     @ApiOperation("Find all planets")

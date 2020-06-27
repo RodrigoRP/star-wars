@@ -25,7 +25,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Cadastro de Planeta").description("Api realiza cadastro de planetas")
+        return new ApiInfoBuilder().title("Star Wars - Planets").description("API realiza cadastro de planetas")
                 .termsOfServiceUrl("").license("Rodrigo Ramos").licenseUrl("")
                 .version("1.0").build();
     }

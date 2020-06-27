@@ -1,7 +1,6 @@
 package com.rodrigoramos.starwars;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rodrigoramos.starwars.controller.impl.PlanetControllerImpl;
 import com.rodrigoramos.starwars.dao.PlanetRepository;
 import com.rodrigoramos.starwars.dto.PlanetDTO;
 import com.rodrigoramos.starwars.model.Planet;
@@ -31,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PlanetControllerServiceTest {
-    private final String BASE_URL = "/api/planet";
+    private final String BASE_URL = "/api/v1/planet";
 
     private ObjectMapper objectMapper;
 

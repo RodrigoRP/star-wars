@@ -14,7 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-@RequestMapping("/api/planet")
+@RequestMapping("/api/v1/planet")
 @RestController
 @RequiredArgsConstructor
 public class PlanetControllerImpl implements PlanetController {

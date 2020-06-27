@@ -1,8 +1,8 @@
 package com.rodrigoramos.starwars.service.impl;
 
 import com.rodrigoramos.starwars.dao.PlanetRepository;
-import com.rodrigoramos.starwars.model.PlanetsAPI;
 import com.rodrigoramos.starwars.model.Planet;
+import com.rodrigoramos.starwars.model.PlanetsAPI;
 import com.rodrigoramos.starwars.model.Results;
 import com.rodrigoramos.starwars.service.PlanetService;
 import com.rodrigoramos.starwars.service.exception.ObjectNotFoundException;
@@ -27,9 +27,9 @@ public class PlanetServiceImpl implements PlanetService {
     @Override
     public Planet save(Planet planet) {
         Optional<Planet> optionalPlanet = repository.findByName(planet.getName());
-        if (optionalPlanet.isPresent()) {
+        if (optionalPlanet.isPresent())
             throw new PlanetRegistrationException("Planeta com o Nome: " + planet.getName() + " ja foi cadastrado.");
-        }
+
         return repository.save(planet);
     }
 
