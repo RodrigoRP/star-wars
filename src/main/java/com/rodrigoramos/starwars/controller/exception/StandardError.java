@@ -2,7 +2,6 @@ package com.rodrigoramos.starwars.controller.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 

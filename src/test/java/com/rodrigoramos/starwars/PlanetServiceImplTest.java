@@ -126,7 +126,6 @@ public class PlanetServiceImplTest {
     public void shouldThrowErrorWhenPlanetAlreadyExistsTest() {
         final Planet planetOne = new Planet(1L, "marte", "temperado", "arido");
         final Planet planetTwo = new Planet(2L, "marte", "temperado", "arido");
-        final Planet planetThr = new Planet(3L, "marte", "temperado", "arido");
 
         planetService.save(planetOne);
 
