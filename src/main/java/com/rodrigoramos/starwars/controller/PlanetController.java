@@ -27,6 +27,6 @@ public interface PlanetController {
     @ApiOperation("Find planet by Name")
     ResponseEntity<Planet> findByName(@PathVariable("planetName") String name);
 
-//    @ApiOperation("Update one data")
-//    PlanetDTO update(@RequestBody PlanetDTO dto, @PathVariable("id") Long id);
+   @ApiOperation("Get the amount planet appears in the films")
+   ResponseEntity<Integer> getAmountFilmAppears(@PathVariable("filmName") String filmName);
 }

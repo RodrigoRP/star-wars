@@ -5,12 +5,17 @@ import com.rodrigoramos.starwars.model.Planet;
 import com.rodrigoramos.starwars.service.exception.*;
 import com.rodrigoramos.starwars.service.impl.*;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +40,7 @@ public class PlanetServiceImplTest {
 
     @Test
     public void getAllPlanetsTest() {
-        List<Planet> list = new ArrayList<Planet>();
+        List<Planet> list = new ArrayList<>();
         final Planet planetOne = new Planet(1L, "marte", "temperado", "arido");
         final Planet planetTwo = new Planet(2L, "jupiter", "temperado", "arido");
 
@@ -125,11 +130,26 @@ public class PlanetServiceImplTest {
     public void shouldThrowErrorWhenPlanetAlreadyExistsTest() {
         final Planet planetOne = new Planet(1L, "marte", "temperado", "arido");
         final Planet planetTwo = new Planet(2L, "marte", "temperado", "arido");
+        final Planet planetThr = new Planet(3L, "marte", "temperado", "arido");
+
+        planetService.save(planetOne);
 
         given(repository.findByName("marte")).willReturn(Optional.of(planetOne));
 
         assertThrows(PlanetRegistrationException.class, () -> planetService.save(planetTwo));
 
         verify(repository, never()).save(planetTwo);
+    }
+
+    @Test
+    public void testGetEmployeeListSuccess() {
+        String namePlanet = "Tatooine";
+        String namePlanet2 = "dasddqulas";
+
+        int quantity = planetService.getQuantityPlanetShowInFilms(namePlanet);
+        int quantity2 = planetService.getQuantityPlanetShowInFilms(namePlanet2);
+
+        Assert.assertEquals(5, quantity);
+        Assert.assertEquals(0, quantity2);
     }
 }

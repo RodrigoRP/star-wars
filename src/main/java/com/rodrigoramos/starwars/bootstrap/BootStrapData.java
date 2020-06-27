@@ -17,15 +17,17 @@ public class BootStrapData implements CommandLineRunner {
     private final PlanetRepository planetRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         Planet planet1 = Planet.builder()
+                .id(1L)
                 .name("Tatooine")
                 .climate("arid")
                 .terrain("desert")
                 .build();
 
         Planet planet2 = Planet.builder()
+                .id(2L)
                 .name("Alderaan")
                 .climate("temperate")
                 .terrain("mountains")

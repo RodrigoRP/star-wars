@@ -6,4 +6,6 @@ public interface PlanetService extends GenericService<Planet, Long> {
 
     Planet findByName(String name);
 
+    int getQuantityPlanetShowInFilms(String name);
+
 }

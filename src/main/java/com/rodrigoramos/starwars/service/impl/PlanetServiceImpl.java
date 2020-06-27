@@ -1,15 +1,23 @@
 package com.rodrigoramos.starwars.service.impl;
 
-import com.rodrigoramos.starwars.service.exception.*;
 import com.rodrigoramos.starwars.dao.PlanetRepository;
+import com.rodrigoramos.starwars.model.PlanetsAPI;
 import com.rodrigoramos.starwars.model.Planet;
+import com.rodrigoramos.starwars.model.Results;
 import com.rodrigoramos.starwars.service.PlanetService;
+import com.rodrigoramos.starwars.service.exception.ObjectNotFoundException;
+import com.rodrigoramos.starwars.service.exception.PlanetRegistrationException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.Optional;
+
+import static java.util.Objects.requireNonNull;
 
 @RequiredArgsConstructor
 @Service
@@ -28,11 +36,7 @@ public class PlanetServiceImpl implements PlanetService {
     @Override
     public void deleteById(Long id) {
         findById(id);
-        try {
-            repository.deleteById(id);
-        } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityException("Não foi possível excluir!");
-        }
+        repository.deleteById(id);
     }
 
     @Override
@@ -54,4 +58,24 @@ public class PlanetServiceImpl implements PlanetService {
                 "Planeta não encontrado! Name: " + name + ", Tipo: " + Planet.class.getName()));
     }
 
+    @Override
+    public int getQuantityPlanetShowInFilms(String name) {
+        RestTemplate template = new RestTemplate();
+        int quantity = 0;
+
+        UriComponents uri = UriComponentsBuilder.newInstance()
+                .scheme("https")
+                .host("swapi.dev/api")
+                .path("planets/")
+                .queryParam("search", name)
+                .build();
+
+        ResponseEntity<PlanetsAPI> entity = template
+                .getForEntity(uri.toUriString(), PlanetsAPI.class);
+        Results[] results = requireNonNull(entity.getBody()).getResults();
+        if (results.length > 0)
+            quantity = results[0].getFilms().length;
+
+        return quantity;
+    }
 }

@@ -38,9 +38,6 @@ public class PlanetControllerServiceTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    @Autowired
-    private PlanetControllerImpl restController;
-
     private MockMvc mockMvc;
 
     @MockBean
@@ -73,7 +70,7 @@ public class PlanetControllerServiceTest {
 
     @Test
     public void buscar_all_200() throws Exception {
-        List<Planet> list = new ArrayList<Planet>();
+        List<Planet> list = new ArrayList<>();
         final Planet planetOne = new Planet(1L, "marte", "temperado", "arido");
         final Planet planetTwo = new Planet(2L, "jupiter", "temperado", "arido");
 
@@ -144,6 +141,13 @@ public class PlanetControllerServiceTest {
                 .andExpect(status().isOk());
 
         verify(mockRepository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    public void buscar_filme_200() throws Exception {
+        mockMvc.perform(get(BASE_URL + "/film/Tatooine"))
+                .andExpect(content().contentType("application/json"))
+                .andExpect(status().isOk());
     }
 
 

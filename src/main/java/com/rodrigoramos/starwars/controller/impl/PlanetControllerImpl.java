@@ -60,4 +60,11 @@ public class PlanetControllerImpl implements PlanetController {
         Planet planet = planetService.findByName(planetName);
         return ResponseEntity.ok().body(planet);
     }
+
+    @Override
+    @GetMapping("/film/{filmName}")
+    public ResponseEntity<Integer> getAmountFilmAppears(@PathVariable("filmName")String filmName) {
+        int quantity = planetService.getQuantityPlanetShowInFilms(filmName);
+        return ResponseEntity.ok().body(quantity);
+    }
 }
