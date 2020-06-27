@@ -24,7 +24,6 @@ public class PlanetControllerImpl implements PlanetController {
 
     @Override
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> save(@RequestBody PlanetDTO planetDTO) {
         Planet planet = planetMapper.toModel(planetDTO);
         planet = planetService.save(planet);
@@ -63,7 +62,7 @@ public class PlanetControllerImpl implements PlanetController {
 
     @Override
     @GetMapping("/film/{filmName}")
-    public ResponseEntity<Integer> getAmountFilmAppears(@PathVariable("filmName")String filmName) {
+    public ResponseEntity<Integer> getAmountFilmAppears(@PathVariable("filmName") String filmName) {
         int quantity = planetService.getQuantityPlanetShowInFilms(filmName);
         return ResponseEntity.ok().body(quantity);
     }
